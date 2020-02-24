@@ -1,0 +1,163 @@
+/*--- Typography ---*/
+body{
+  font-family: $font-main;
+  font-size: 18px;
+  @include respond-to(sm){
+    font-size: 16px;
+  }
+  line-height: 1;
+  color: var(--color-text);
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: 400;
+}
+h1{
+  @include fsz(48px);
+  color: var(--color-white);
+  font-weight: $weight-extrabold;
+  line-height: 1.33;
+  white-space: nowrap;
+  @include respond-to(md){
+    @include fsz(40px);
+  }
+  @include respond-to(sm){
+    @include fsz(32px);
+  }
+  span{
+    + span{
+      margin-left: 32px;
+      @include respond-to(lg){
+        display: none;
+      }
+      @include respond-to(sm){
+        margin-left: 24px;
+      }
+    }
+  }
+}
+h2{
+  @include fsz(48px);
+  color: var(--color-white);
+  font-weight: $weight-extrabold;
+  line-height: 1.33;
+  background: var(--color-heading);
+  border-radius: 10px;
+  margin-bottom: 56px;
+  padding: 24px;
+  text-align: center;
+  @include respond-to(md){
+    @include fsz(36px);
+  }
+  @include respond-to(sm){
+    @include fsz(24px);
+    padding: 12px;
+    margin-bottom: 32px;
+  }
+  &:not(:first-of-type){
+    margin-top: 128px;
+    @include respond-to(md){
+      margin-top: 80px;
+    }
+    @include respond-to(sm){
+      margin-top: 48px;
+    }
+  }
+}
+p{
+  @include fsz(18px);
+  line-height: 1.4;
+  @include respond-to(sm){
+    @include fsz(16px);
+  }
+}
+a{
+  text-decoration: underline;
+  &:hover{
+    text-decoration: underline;
+  }
+}
+sup{
+  font-size: 13px;
+  @include respond-to(sm){
+    @include fsz(14px);
+  }
+  color: var(--color-blue);
+  line-height: 0;
+  vertical-align: 3px;
+}
+
+ul{
+  @include fsz(18px);
+  font-weight: $weight-regular;
+  max-width: 764px;
+  @include respond-to(sm){
+    @include fsz(16px);
+  }
+  li{
+    position: relative;
+    padding-left: 26px;
+    line-height: 1.4;
+    &:before{
+      position: absolute;
+      left: 0;
+    }
+  }
+  ul{
+    padding-top: 16px;
+    padding-left: 2px;
+    ul{
+      padding-top: 0;
+      padding-left: 0;
+    }
+  }
+}
+ul.large{
+  max-width: none;
+  > li{
+    margin-top: 32px;
+    @include fsz(24px);
+    line-height: 1.33;
+    font-weight: $weight-semibold;
+    padding-left: 30px;
+    position: relative;
+    @include respond-to(sm){
+      @include fsz(20px);
+    }
+    &:before{
+      position: absolute;
+      left: 0;
+    }
+  }
+}
+.roman{
+  counter-reset: roman_count;
+  > li{
+    counter-increment: roman_count;
+    &:before {
+      content: counter(roman_count, upper-roman)'.';
+    }
+  }
+}
+.alphabet{
+  counter-reset: alpha_count;
+  > li{
+    counter-increment: alpha_count;
+    &:before {
+      content: counter(alpha_count, lower-alpha)'.';
+    }
+  }
+  &[start="3"] {
+     counter-reset: alpha_count 2;
+  }
+}
+.decimal{
+  counter-reset: decimal_count;
+  > li{
+    counter-increment: decimal_count;
+    &:before {
+      content: counter(decimal_count, decimal)'.';
+    }
+  }
+}

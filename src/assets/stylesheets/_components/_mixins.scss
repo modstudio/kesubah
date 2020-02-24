@@ -1,0 +1,76 @@
+//--- Different devices resolutions
+@mixin respond-to($media) {
+    @if $media == xs {
+      @media only screen and (max-width: $screen-xs) { @content; }
+    }
+    @else if $media == xs_up {
+        @media only screen and (min-width: $screen-xs + 1/$grid-font-size) { @content; }
+    }
+    @else if $media == sm {
+        @media only screen and (max-width: $screen-sm) { @content; }
+    }
+    @else if $media == sm_up {
+        @media only screen and (min-width: $screen-sm + 1/$grid-font-size) { @content; }
+    }
+    @else if $media == md {
+        @media only screen and (max-width: $screen-md) { @content; }
+    }
+    @else if $media == md_up {
+        @media only screen and (min-width: $screen-md + 1/$grid-font-size) { @content; }
+    }
+    @else if $media == lg {
+        @media only screen and (max-width: $screen-lg) { @content; }
+    }
+    @else if $media == lg_up {
+        @media only screen and (min-width: $screen-lg + 1/$grid-font-size) { @content; }
+    }
+    @else if $media == xl {
+        @media only screen and (max-width: $screen-xl) { @content; }
+    }
+    @else if $media == xl_up {
+        @media only screen and (min-width: $screen-xl + 1/$grid-font-size) { @content; }
+    }
+}
+
+//--- FontSize
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+@mixin fsz($size) {
+  font-size: calculateRem($size);
+}
+
+//--- Text Truncate
+@mixin truncateText(){
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// Define vertical, horizontal, or both position
+@mixin center($position) {
+  position: absolute;
+
+  @if $position == 'vertical' {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  @else if $position == 'horizontal' {
+    left: 50%;
+    transform: translate(-50%);
+  }
+  @else if $position == 'both' {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+//--- Placeholder
+@mixin placeholder {
+  &::-webkit-input-placeholder {@content};
+  &:-moz-placeholder           {@content};
+  &::-moz-placeholder          {@content};
+  &:-ms-input-placeholder      {@content};
+}

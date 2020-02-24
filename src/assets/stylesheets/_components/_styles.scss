@@ -1,0 +1,336 @@
+body{
+  background: var(--color-bg);
+  transition: 800ms color;
+}
+.site-header {
+  padding: 28px 64px;
+  background: var(--color-dark-blue);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  @include respond-to(sm){
+    align-items: center;
+  }
+  @include respond-to(md){
+    padding: 32px 32px 32px 24px;
+  }
+  @include respond-to(sm){
+    padding: 44px 24px 44px 20px;
+  }
+  h1{
+    @include center(horizontal);
+  }
+}
+
+.btn {
+  width: 228px;
+  height: 56px;
+  color: var(--color-white);
+  border: 2px solid var(--color-light-grey);
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  @include fsz(18px);
+  font-weight: $weight-extrabold;
+  text-decoration: none;
+  svg{
+    display: none;
+  }
+  @include respond-to(lg){
+    height: 48px;
+    width: 180px;
+  }
+  @include respond-to(md){
+    height: 40px;
+    width: auto;
+    padding: 0 12px;
+    font-weight: $weight-bold;
+    @include fsz(16px);
+  }
+  &:hover{
+    background: rgba(var(--color-white-rgb), 0.2);
+    text-decoration: none;
+  }
+  @include respond-to(sm){
+    border: none;
+    height: auto;
+    width: auto;
+    padding: 0;
+    &:hover{
+      background: none;
+    }
+    span{
+      display: none;
+    }
+    svg{
+      display: block;
+    }
+  }
+}
+
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+}
+.theme-switch {
+  display: flex;
+  align-items: center;
+  width: 96px;
+  justify-content: space-between;
+  @include respond-to(sm){
+    width: 16px;
+  }
+}
+.theme-switch input {
+  display:none;
+  &:checked ~ .slider {
+    background-color: var(--color-blue);
+    &:before{
+      transform: translateX(24px);
+    }
+  }
+  &:checked ~ .theme-dark {
+    path{
+      fill: var(--color-white);
+    }
+  }
+  &:checked ~ .theme-light {
+    path{
+      fill: var(--color-dark-grey);
+    }
+  }
+}
+.theme-dark, .theme-light{
+  line-height: 0;
+  path{
+    transition: 300ms;
+  }
+}
+.theme-light{
+  @include respond-to(sm){
+    display: none;
+  }
+}
+.slider {
+  background-color: var(--color-dark-grey);
+  width: 48px;
+  height: 24px;
+  cursor: pointer;
+  transition: .4s;
+  position: relative;
+  @include respond-to(sm){
+    width: 16px;
+    height: 16px;
+    opacity: 0;
+    position: absolute;
+    z-index: 2;
+  }
+  &:before {
+    background-color: var(--color-white);
+    bottom: 2px;
+    content: "";
+    height: 20px;
+    left: 2px;
+    position: absolute;
+    transition: .4s;
+    width: 20px;
+    @include respond-to(sm){
+      display: none;
+    }
+  }
+  &.round{
+    border-radius: 20px;
+    &:before {
+      border-radius: 50%;
+    }
+  }
+}
+
+.article{
+  max-width: 976px;
+  margin: 0 auto;
+  padding: 64px 0 128px;
+  overflow: hidden;
+  @include respond-to(md){
+    padding: 64px 20px 80px;
+  }
+  @include respond-to(sm){
+    padding: 48px 20px;
+  }
+  blockquote{
+    p + p{
+      margin-top: 24px;
+    }
+  }
+  figcaption{
+    margin-top: 24px;
+  }
+}
+
+.content {
+  padding-left: 24px;
+  padding-right: 24px;
+  @include respond-to(md){
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+[data-tooltip]{
+  position: relative;
+  cursor: auto;
+  z-index: 2;
+  font-weight: $weight-regular;
+  @include respond-to(sm){
+    position: static;
+  }
+  &:before{
+    content: attr(data-tooltip);
+    display: block;
+    border-radius: 3px;
+    background: var(--color-tooltip);
+    box-shadow: 0 5px 10px 0 rgba(65, 66, 79, 0.1);
+    color: var(--color-white);
+    opacity: 0;
+    padding: 7px 10px 10px;
+    @include center(horizontal);
+    bottom: 12px;
+    visibility: hidden;
+    transition: 200ms;
+    line-height: 1.4;
+    @include fsz(14px);
+    width: 120px;
+    text-align: center;
+    white-space: pre-line;
+    @include respond-to(sm){
+      position: fixed;
+      top: 0;
+      bottom: auto;
+      left: 0;
+      right: 0;
+      transform: none;
+      width: auto !important;
+      z-index: 3;
+      border-radius: 0;
+      @include fsz(16px);
+      padding: 12px;
+      pointer-events: none;
+    }
+  }
+  &:after{
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 6px 0px 6px;
+    border-color: var(--color-tooltip) transparent transparent transparent;
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    @include center(horizontal);
+    opacity: 0;
+    visibility: hidden;
+    transition: 200ms;
+    @include respond-to(sm){
+      display: none;
+    }
+  }
+  &:hover{
+    &:before, &:after{
+      opacity: 1;
+      visibility: visible;
+      @include respond-to(sm){
+        opacity: 0;
+        visibility: visible;
+      }
+    }
+  }
+  &.active{
+    &:before{
+      @include respond-to(sm){
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+  &.tooltip-lg{
+    &:before{
+      width: 320px;
+    }
+  }
+  &.tooltip-md{
+    &:before{
+      width: 240px;
+    }
+  }
+}
+.kesubah-wrapper{
+  > div{
+    display: flex;
+    flex-wrap: wrap;
+    @include respond-to(sm){
+      flex-direction: column;
+      align-items: center;
+    }
+    margin-bottom: 8px;
+    line-height: 1.3;
+    > div{
+      &:nth-of-type(even){
+        flex: 0 0 40%;
+        max-width: 40%;
+        @include respond-to(sm){
+          flex: 0 0 100%;
+          max-width: 100%;
+          text-align: center;
+          order: -1;
+        }
+      }
+      &:nth-of-type(odd){
+        flex: 0 0 60%;
+        max-width: 60%;
+        text-align: right;
+        padding-right: 16px;
+        @include respond-to(sm){
+          flex: 0 0 100%;
+          max-width: 100%;
+          padding-right: 0;
+          text-align: center;
+          margin-bottom: 8px;
+        }
+      }
+    }
+  }
+}
+.mb-24{
+  margin-bottom: 24px !important;
+}
+
+// Right to left paragraph direction for Hebrew text
+.rl{
+  direction: rtl !important;
+  text-align: left;
+}
+
+.site-footer{
+  @include fsz(14px);
+  padding: 49px 20px;
+  background: var(--color-text-black);
+  color: var(--color-white);
+  font-weight: $weight-bold;
+  text-align: center;
+  span{
+    margin-left: 4px;
+    &:before{
+      content: '|';
+      margin-right: 5px;
+    }
+    @include respond-to(sm){
+      display: block;
+      margin-top: 12px;
+      &:before{
+        display: none;
+      }
+    }
+  }
+}
