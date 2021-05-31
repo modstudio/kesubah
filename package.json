@@ -31,7 +31,7 @@
     "imagemin-jpeg-recompress": "^6.0.0",
     "imagemin-pngquant": "^8.0.0",
     "gulp-rename": "^2.0.0",
-    "npm": "^6.13.7",
+    "npm": "^6.14.6",
     "pump": "^3.0.0"
   },
   "dependencies": {
